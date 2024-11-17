@@ -1,3 +1,3 @@
 import os
-DEBUG = True
-SECRET_KEY = 'secret_key' if DEBUG else os.environ['SECRET_KEY']
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'secret')
