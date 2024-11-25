@@ -1,5 +1,5 @@
 import httpx
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, HTTPException, Header, Request, Cookie
 from ..dependencies import service_map
 
 router = APIRouter()
@@ -20,13 +20,16 @@ async def forward_request(request: Request, full_path: str):
             # Construct the full URL to the target microservice
             url = f"{service_url}/{service_path}"
             print(url)
+            request.cookies.get("token")
+            headers = request.scope["headers"]
+            headers[b"X-Token"] = request.cookies.get("token", b"")
 
             # Forward the request with the same method and body
             response = await client.request(
                 method=request.method,
                 url=url,
                 params=request.query_params,
-                headers=request.headers,
+                headers=headers,
                 content=await request.body()
             )
             

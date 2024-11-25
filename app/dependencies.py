@@ -8,7 +8,3 @@ service_map = {
     "/delete": "http://deleter-svc",
     "/admin": "http://admin-svc",
 }
-
-async def get_token_header(X_TOKEN: Annotated[str, Header()]):
-    if X_TOKEN != SECRET_KEY:
-        raise HTTPException(status_code=400, detail="X-Token header invalid")

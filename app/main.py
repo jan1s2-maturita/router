@@ -1,9 +1,8 @@
 from fastapi import FastAPI, Depends
 # from middlewares import AuthMiddleware, LogMiddleware, ExceptionMiddleware
-from .dependencies import get_token_header
 from .routers import forward
 
-app = FastAPI(dependencies=[Depends(get_token_header)])
+app = FastAPI()
 # app = FastAPI()
 
 # Define the internal routes for each microservice
