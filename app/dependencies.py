@@ -1,10 +1,7 @@
-from typing import Annotated
-from fastapi import HTTPException, Header
-from .config import SECRET_KEY
 service_map = {
-    "/auth": "http://auth-svc",
-    "/deploy": "http://deployer-svc",
-    "/list": "http://lister-svc",
-    "/delete": "http://deleter-svc",
-    "/admin": "http://admin-svc",
+    "/auth": "http://auth:8000",
+    "/deploy": "http://deployer:8000",
+    "/list": "http://lister:8000",
+    "/delete": "http://deleter:8000",
+    "/admin": "http://admin:8000",
 }
