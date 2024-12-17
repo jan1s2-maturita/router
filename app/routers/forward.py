@@ -1,3 +1,4 @@
+from fastapi.responses import HTMLResponse, JSONResponse
 import httpx
 from fastapi import APIRouter, HTTPException, Header, Request, Cookie, Response
 from ..dependencies import service_map
@@ -38,10 +39,10 @@ async def forward_request(request: Request, full_path: str):
             response_type = 'json'
             if 'application/json' in response.headers['content-type']:
                 response = response.content
-                return Response(content=response, media_type='application/json')
+                return JSONResponse(content=response)
             else:
                 response = response.content
-                return Response(content=response, media_type='text/html')
+                return HTMLResponse(content=response)
             
     except httpx.HTTPError as e:
         raise HTTPException(status_code=500, detail=str(e))
