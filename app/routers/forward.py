@@ -1,5 +1,5 @@
 import httpx
-from fastapi import APIRouter, HTTPException, Header, Request, Cookie
+from fastapi import APIRouter, HTTPException, Header, Request, Cookie, Response
 from ..dependencies import service_map
 
 router = APIRouter()
@@ -35,13 +35,14 @@ async def forward_request(request: Request, full_path: str):
                 headers=headers,
                 content=await request.body()
             )
+            response_type = 'json'
             if 'application/json' in response.headers['content-type']:
                 response = response.json()
+                return Response(content=response, media_type='application/json')
             else:
                 response = response.content
+                return Response(content=response, media_type='text/html')
             
-            # Return the response from the target service
-            return response
     except httpx.HTTPError as e:
         raise HTTPException(status_code=500, detail=str(e))
 
