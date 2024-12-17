@@ -23,6 +23,7 @@ async def forward_request(request: Request, full_path: str):
             print(url)
             request.cookies.get("token")
             headers = request.scope["headers"]
+            print(headers)
             if not headers.get(b"X-Token"):
                 headers[b"X-Token"] = request.cookies.get("token", b"")
 
