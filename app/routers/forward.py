@@ -24,8 +24,8 @@ async def forward_request(request: Request, full_path: str):
             request.cookies.get("token")
             headers = request.scope["headers"]
             print(headers)
-            if not headers.get(b"X-Token"):
-                headers[b"X-Token"] = request.cookies.get("token", b"")
+            if all(t[0] != b"x-token" for t in headers):
+                headers.append((b"x-token", request.cookies.get("token", b"")))
 
             # Forward the request with the same method and body
             response = await client.request(
