@@ -37,7 +37,7 @@ async def forward_request(request: Request, full_path: str):
             )
             response_type = 'json'
             if 'application/json' in response.headers['content-type']:
-                response = response.json()
+                response = response.content
                 return Response(content=response, media_type='application/json')
             else:
                 response = response.content
