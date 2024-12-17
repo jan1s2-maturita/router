@@ -8,6 +8,7 @@ router = APIRouter()
 async def forward_request(request: Request, full_path: str):
     # Extract the first part of the path (like /auth, /users, /orders)
     path_parts = full_path.split('/')
+    path_parts = path_parts[1:]
     if len(path_parts) < 1 or f"/{path_parts[0]}" not in service_map:
         raise HTTPException(status_code=404, detail=f"Service not found - {path_parts}")
 
