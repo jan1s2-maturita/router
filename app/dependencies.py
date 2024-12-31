@@ -5,4 +5,5 @@ service_map = {
     "/deleter": "http://deleter:8000",
     "/admin": "http://admin:8000",
     "/flag-submit": "http://flag-submit:8000",
+    "/accessbox": "http://accessbox:8000",
 }
