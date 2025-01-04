@@ -38,11 +38,15 @@ async def forward_request(request: Request, full_path: str):
             )
             response_type = 'json'
             if 'application/json' in response.headers['content-type']:
-                response = response.content
-                return JSONResponse(content=response)
+                print(response)
+                print(response.content)
+                print(type(response.content))
+                return JSONResponse(content=response.content, status_code=response.status_code)
             else:
-                response = response.content
-                return HTMLResponse(content=response)
+                print(response)
+                print(response.content)
+                print(type(response.content))
+                return HTMLResponse(content=response.content, status_code=response.status_code)
             
     except httpx.HTTPError as e:
         raise HTTPException(status_code=500, detail=str(e))
