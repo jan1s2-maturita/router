@@ -41,12 +41,12 @@ async def forward_request(request: Request, full_path: str):
                 print(response)
                 print(response.content)
                 print(type(response.content))
-                return JSONResponse(content=response.content, status_code=response.status_code)
+                return JSONResponse(content=response.content.decode(), status_code=response.status_code)
             else:
                 print(response)
                 print(response.content)
                 print(type(response.content))
-                return HTMLResponse(content=response.content, status_code=response.status_code)
+                return HTMLResponse(content=response.content.decode(), status_code=response.status_code)
             
     except httpx.HTTPError as e:
         raise HTTPException(status_code=500, detail=str(e))
