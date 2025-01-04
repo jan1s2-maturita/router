@@ -1,6 +1,7 @@
 from fastapi.responses import HTMLResponse, JSONResponse
 import httpx
 from fastapi import APIRouter, HTTPException, Header, Request, Cookie, Response
+import json
 from ..dependencies import service_map
 
 router = APIRouter()
@@ -41,7 +42,7 @@ async def forward_request(request: Request, full_path: str):
                 print(response)
                 print(response.content)
                 print(type(response.content))
-                return JSONResponse(content=response.content.decode(), status_code=response.status_code)
+                return JSONResponse(content=json.loads(response.content.decode()), status_code=response.status_code)
             else:
                 print(response)
                 print(response.content)
