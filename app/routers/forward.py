@@ -37,6 +37,7 @@ async def forward_request(request: Request, full_path: str):
                 headers=headers,
                 content=await request.body()
             )
+            print(response)
             response_type = 'json'
             # if 'application/json' in response.headers['content-type']:
                 # return JSONResponse(content=json.loads(response.content.decode()), status_code=response.status_code)
